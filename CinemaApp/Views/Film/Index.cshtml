@@ -1,0 +1,33 @@
+﻿@model List<Film>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Manage</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var film in Model)
+            {
+                <tr>
+                    <th scope="row">@film.Id</th>
+                    <td>@film.Name</td>
+                    <td>@film.Description</td>
+                    <td>@film.Rating</td>
+                    <td>
+                        <form>
+                            <input type="text" name="id" value="@film.Id" hidden/>
+                            <input class="btn btn-primary" type="submit" value="Edit" asp-action="Edit"/>
+                            <input class="btn btn-danger" type="submit" value="Delete" asp-action="ConfirmDelete"/>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

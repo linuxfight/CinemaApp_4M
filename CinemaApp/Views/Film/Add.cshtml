@@ -1,0 +1,17 @@
+﻿@model Film
+
+<h1>Add new film</h1>
+
+<div>
+	<form asp-action="AddToList">
+		<input type="text" name="id" value="@Model.Id" hidden />
+		<label>Name	: </label>
+		<input type="text" asp-for="Name" value="" />
+		<label>Description: </label>
+		<input type="text" asp-for="Description" value="" />
+		<label>Rating: </label>
+		<input type="text" asp-for="Rating" value="" />
+
+		<input type="submit" value="Add Film" />
+	</form>
+</div>

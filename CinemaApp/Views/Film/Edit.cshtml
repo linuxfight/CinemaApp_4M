@@ -1,0 +1,17 @@
+﻿@model Film
+
+<h1>Edit film @Model.Id</h1>
+
+<div>
+	<form asp-action="Update">
+		<input type="text" asp-for="Id" hidden/>
+		<label>Name	: </label>
+		<input type="text" asp-for="Name" />
+		<label>Description: </label>
+		<input type="text" asp-for="Description" />
+		<label>Rating: </label>
+		<input type="text" asp-for="Rating" />
+
+		<input class="btn btn-primary" type="submit" value="Save" />
+	</form>
+</div>

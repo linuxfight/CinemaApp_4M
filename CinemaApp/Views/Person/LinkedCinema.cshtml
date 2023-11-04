@@ -1,0 +1,12 @@
+﻿@model List<Person>
+
+<div>
+	@foreach (var person in Model)
+	{
+		<h3> Name: @person.Name </h3>
+		@foreach (var film in person.Films)
+		{
+			<h3> @film.Name </h3>
+		}
+	}
+</div>
