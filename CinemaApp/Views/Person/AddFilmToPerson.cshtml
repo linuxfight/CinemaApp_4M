@@ -1,17 +1,9 @@
 ﻿@model CinemaApp.Models.ViewModel.PersonFilmViewModel
 
-<div>
-	<form asp-action="AddFilmToPerson" method="post">
-		<p>
-			<select asp-for="FilmId" asp-items="@Model.Films" />
-		</p>
-		<p>
-			<select asp-for="PersonId" asp-items="@Model.Persons" />
-		</p>
-		<input class="btn btn-primary" type="submit" value="Add film to person"/>
-	</form>
+<form asp-action="AddFilmToPerson" method="post">
+    <select asp-for="PersonId" asp-items="@Model.Persons"> </select>
 
-	<select asp-items="@Model.Persons">
+    <select asp-for="FilmId" asp-items="@Model.Films"> </select>
 
-	</select>
-</div>
+    <input type="submit" value="Привязать данные" />
+</form>

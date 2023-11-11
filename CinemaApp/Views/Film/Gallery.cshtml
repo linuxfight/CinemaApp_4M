@@ -1,0 +1,17 @@
+﻿@model string[]
+
+<h1> Gallery Films </h1>
+
+<div class="galleryContainer">
+	@foreach (var path in Model)
+	{
+		<div class="gallery-item">
+			@{var fileName = new FileInfo(path).Name;}
+			<img src="/images/@fileName" />
+			<form method="post" action="/Film/DeleteImage">
+				<input type="text" name="name" value="@fileName" hidden/>
+				<input type="submit" value="Delete"/>
+			</form>
+		</div>
+	}
+</div>

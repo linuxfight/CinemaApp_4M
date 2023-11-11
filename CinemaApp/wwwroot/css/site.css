@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.gallery-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gallery-item {
+    margin: 10px;
+}
+
+.gallery-item img {
+    width: 200px;
+    height: auto;
+}
