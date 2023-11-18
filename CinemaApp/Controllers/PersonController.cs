@@ -1,6 +1,7 @@
 ﻿using CinemaApp.Data;
 using CinemaApp.Models;
 using CinemaApp.Models.ViewModel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -8,7 +9,14 @@ namespace CinemaApp.Controllers
 {
     public class PersonController : Controller
     {
-        public IActionResult Index()
+		private IWebHostEnvironment webHostEnvironment;
+
+		public PersonController(IWebHostEnvironment webHostEnvironment)
+		{
+			this.webHostEnvironment = webHostEnvironment;
+		}
+
+		public IActionResult Index()
         {
             return View(DataCinema.Persons);
         }
@@ -88,5 +96,43 @@ namespace CinemaApp.Controllers
         {
             return View(DataCinema.Persons);
         }
-    }
+
+		public IActionResult Gallery()
+		{
+			var picturesFolder = Path.Combine(webHostEnvironment.WebRootPath, "actors");
+			var photos = Directory.GetFiles(picturesFolder);
+			return View(photos);
+		}
+
+		public IActionResult UploadPicture()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult Upload(IFormFile file)
+		{
+			if (file != null && file.Length > 0)
+			{
+				var extension = Path.GetExtension(file.FileName);
+				var fileName = Guid.NewGuid().ToString() + extension;
+				var uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "actors");
+				var path = Path.Combine(uploadFolder, fileName);
+				var stream = new FileStream(path, FileMode.Create);
+				file.CopyTo(stream);
+				stream.Close();
+			}
+
+			return RedirectToAction("UploadPicture");
+		}
+
+		[HttpPost]
+		public IActionResult DeleteImage(string name)
+		{
+			var path = Path.Combine(webHostEnvironment.WebRootPath, "actors", name);
+			if (Path.Exists(path))
+				System.IO.File.Delete(path);
+			return RedirectToAction("Gallery");
+		}
+	}
 }
